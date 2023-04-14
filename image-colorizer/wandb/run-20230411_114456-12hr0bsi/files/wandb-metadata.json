@@ -1,0 +1,116 @@
+{
+    "os": "Linux-5.15.90.1-microsoft-standard-WSL2-x86_64-with-glibc2.36",
+    "python": "3.9.16",
+    "heartbeatAt": "2023-04-11T15:44:56.934558",
+    "startedAt": "2023-04-11T15:44:56.553175",
+    "docker": null,
+    "cuda": null,
+    "args": null,
+    "state": "running",
+    "program": "<python with no main file>",
+    "git": {
+        "remote": "git@github.com:pranavavva/image-colorizer.git",
+        "commit": "7581fb90f4e1f12f07433f4578e732ed1736b421"
+    },
+    "email": "pranav.avva@gmail.com",
+    "root": "/home/pavva/Projects/image-colorizer",
+    "host": "DESKTOP-EGREA0U",
+    "username": "pavva",
+    "executable": "/home/pavva/Projects/image-colorizer/venv/bin/python",
+    "cpu_count": 8,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 3393.6569999999997,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3393.657,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3393.657,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3393.657,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3393.657,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3393.657,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3393.657,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3393.657,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3393.657,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3393.657,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3393.657,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3393.657,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3393.657,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3393.657,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3393.657,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3393.657,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3393.657,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "total": 1006.853931427002,
+        "used": 18.87873077392578
+    },
+    "memory": {
+        "total": 7.722927093505859
+    }
+}

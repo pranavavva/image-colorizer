@@ -1,0 +1,46 @@
+wandb_version: 1
+
+learning_rate:
+  desc: null
+  value: 0.001
+architecture:
+  desc: null
+  value: CNN
+batch_size:
+  desc: null
+  value: 64
+epochs:
+  desc: null
+  value: 10
+loss_fn:
+  desc: null
+  value: MSELoss
+dataset:
+  desc: null
+  value: MIRFLICKR-25k-thumbs
+_wandb:
+  desc: null
+  value:
+    python_version: 3.9.16
+    cli_version: 0.14.2
+    framework: torch
+    is_jupyter_run: true
+    is_kaggle_kernel: false
+    start_time: 1681227896.558569
+    t:
+      1:
+      - 1
+      - 41
+      - 55
+      2:
+      - 1
+      - 41
+      - 55
+      3:
+      - 16
+      - 23
+      4: 3.9.16
+      5: 0.14.2
+      8:
+      - 1
+      - 5

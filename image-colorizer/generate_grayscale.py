@@ -4,10 +4,19 @@ import numpy as np
 import os
 
 def main():
-    for i in range(1, 25001):
-        im = cv2.imread(f"data/thumbs25k/im{i}.jpg", cv2.IMREAD_GRAYSCALE)
-        cv2.imwrite(f"im{i}.jpg", img=im)
-        print(f"Processed image {i}")
+    directory = "data/thumbs/train"
+    target_directory = "data/thumbs_gray/train"
+    for count, filename in enumerate(os.listdir(directory)):
+        im = cv2.imread(os.path.join(directory, filename), cv2.IMREAD_GRAYSCALE)
+        cv2.imwrite(os.path.join(target_directory, filename), img=im)
+        print(f"Processed image {count + 1}")
+
+    directory = "data/thumbs/test"
+    target_directory = "data/thumbs_gray/test"
+    for count, filename in enumerate(os.listdir(directory)):
+        im = cv2.imread(os.path.join(directory, filename), cv2.IMREAD_GRAYSCALE)
+        cv2.imwrite(os.path.join(target_directory, filename), img=im)
+        print(f"Processed image {count + 1}")
 
 if __name__ == "__main__":
     main()
