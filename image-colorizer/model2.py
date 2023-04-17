@@ -78,14 +78,12 @@ train_dataloader = DataLoader(
     batch_size=BATCH_SIZE,
     shuffle=True,
     pin_memory=True,
-    num_workers=40,
 )
 val_dataloader = DataLoader(
     val_data,
     batch_size=BATCH_SIZE,
     shuffle=False,
     pin_memory=True,
-    num_workers=40,
 )
 
 
