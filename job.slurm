@@ -14,4 +14,4 @@ module purge
 pwd
 source venv/bin/activate
 cd image-colorizer
-python model2.py > output.txt
+python model2.py
