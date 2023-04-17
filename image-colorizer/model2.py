@@ -63,14 +63,14 @@ train_data = ImageColorizerDataset(
     train=True,
     transform=transform,
     target_transform=transform,
-    n_samples=10000,
+    n_samples=1281167,
 )
 val_data = ImageColorizerDataset(
     root_dir="./data",
     train=False,
     transform=transform,
     target_transform=transform,
-    n_samples=1000,
+    n_samples=50000,
 )
 
 train_dataloader = DataLoader(
