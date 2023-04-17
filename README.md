@@ -41,4 +41,5 @@ COS 429 Final Project
         )
         ```
     - L2 loss is calculated per pixel
+    - Predicted images have a heavy sepia tint. This is likely due to the fact that the L2 penalty is excessively penalizing the model. Desaturated colord tend to have a lower L2 loss than saturated colors.
     
