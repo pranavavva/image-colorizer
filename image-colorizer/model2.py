@@ -5,7 +5,6 @@ import torch
 from torch import nn
 from torch.utils.data import Dataset, DataLoader
 import torch.nn.functional as F
-import torch_directml
 from torchvision import transforms
 from skimage import io, color
 import lightning.pytorch as pl
