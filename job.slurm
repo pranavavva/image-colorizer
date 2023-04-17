@@ -11,6 +11,7 @@
 #SBATCH --mail-user=avva@cs.princeton.edu
 
 module purge
+pwd
 source venv/bin/activate
 cd image-colorizer
 python model2.py
