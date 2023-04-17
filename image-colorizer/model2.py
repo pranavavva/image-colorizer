@@ -233,7 +233,7 @@ class LitAutoEncoder(pl.LightningModule):
 
 def main():
     autoencoder = LitAutoEncoder(encoder_class=Encoder, decoder_class=Decoder)
-    trainer = pl.Trainer(max_epochs=128, accelerator="gpu", num_nodes=1, devices=2, strategy="ddp")
+    trainer = pl.Trainer(max_epochs=128, accelerator="gpu", num_nodes=1, devices=4, strategy="ddp")
     trainer.fit(
         autoencoder,
         train_dataloaders=train_dataloader,
