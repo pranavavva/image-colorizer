@@ -16,4 +16,4 @@ module load cudnn/cuda-11.5/8.3.2
 pwd
 source venv/bin/activate
 cd image-colorizer
-python model3raw.py
+python model4.py
