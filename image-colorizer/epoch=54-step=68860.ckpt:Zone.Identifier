@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://myadroit.princeton.edu/pun/sys/dashboard/files/fs//scratch/network/pavva/image-colorizer/image-colorizer/lightning_logs/version_6/checkpoints
+HostUrl=https://myadroit.princeton.edu/pun/sys/dashboard/files/fs//scratch/network/pavva/image-colorizer/image-colorizer/lightning_logs/version_6/checkpoints/epoch=54-step=68860.ckpt
