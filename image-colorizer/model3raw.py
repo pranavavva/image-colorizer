@@ -9,7 +9,7 @@ from torchvision import transforms
 from torch.utils.tensorboard import SummaryWriter
 
 writer = SummaryWriter("runs/model3raw_ex1")
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "mps")
 
 print(f"Using device: {device}")
 
@@ -55,9 +55,9 @@ full_set = ImageNetDataset(root_dir=root_dir, train=True, n_samples=n_train, tra
 train_set, val_set = random_split(full_set, [train_set_size, val_set_size])
 test_set = ImageNetDataset(root_dir=root_dir, train=False, n_samples=n_test, transform=transform, target_transform=transform)
 
-train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True, num_workers=8)
-val_loader = DataLoader(val_set, batch_size=batch_size, shuffle=True, num_workers=8)
-test_loader = DataLoader(test_set, batch_size=batch_size, shuffle=True, num_workers=8)
+train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True, num_workers=0)
+val_loader = DataLoader(val_set, batch_size=batch_size, shuffle=True, num_workers=0)
+test_loader = DataLoader(test_set, batch_size=batch_size, shuffle=True, num_workers=0)
 
 l, ab = next(iter(train_loader))
 
