@@ -9,7 +9,7 @@ from torch.utils.data import Dataset, DataLoader, random_split
 from torchvision import transforms
 from torch.utils.tensorboard import SummaryWriter
 
-writer = SummaryWriter("runs/model4raw_ex1")
+writer = SummaryWriter("runs/model4_ex1")
 device = torch.device("cuda" if torch.cuda.is_available() else "mps")
 
 print(f"Using device: {device}")
@@ -228,8 +228,6 @@ from torchinfo import summary
 
 model = ImageColorizerModel()
 summary(model, input_size=(batch_size, 1, 64, 64), col_names=["input_size", "output_size", "num_params", "kernel_size",], depth=2)
-
-exit()
 
 model = ImageColorizerModel().to(device)
 
