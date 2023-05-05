@@ -11,6 +11,8 @@
 #SBATCH --mail-user=avva@cs.princeton.edu
 
 module purge
+module load cudatoolkit/11.7
+module load cudnn/cuda-11.5/8.3.2
 pwd
 source venv/bin/activate
 cd image-colorizer

@@ -6,8 +6,9 @@ import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader, random_split
 from torchvision import transforms
+from torch.utils.tensorboard import SummaryWriter
 
-
+writer = SummaryWriter("runs/model3raw_ex1")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 print(f"Using device: {device}")
@@ -54,9 +55,9 @@ full_set = ImageNetDataset(root_dir=root_dir, train=True, n_samples=n_train, tra
 train_set, val_set = random_split(full_set, [train_set_size, val_set_size])
 test_set = ImageNetDataset(root_dir=root_dir, train=False, n_samples=n_test, transform=transform, target_transform=transform)
 
-train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True)
-val_loader = DataLoader(val_set, batch_size=batch_size, shuffle=True)
-test_loader = DataLoader(test_set, batch_size=batch_size, shuffle=True)
+train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True, num_workers=8)
+val_loader = DataLoader(val_set, batch_size=batch_size, shuffle=True, num_workers=8)
+test_loader = DataLoader(test_set, batch_size=batch_size, shuffle=True, num_workers=8)
 
 l, ab = next(iter(train_loader))
 
@@ -241,6 +242,10 @@ def train_loop(train_loader, model, loss_fn, optimizer, epoch):
 
         if batch % 50 == 0:
             print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
+
+            writer.add_scalar('training loss',
+                            loss,
+                            epoch * len(train_loader) + batch)
         
         # save a checkpoint every 1000 batches
         if batch % 1000 == 0:
@@ -250,9 +255,9 @@ def train_loop(train_loader, model, loss_fn, optimizer, epoch):
                 'optimizer_state_dict': optimizer.state_dict(),
                 'loss': loss,
                 }, f"checkpoints/model3raw_checkpoint_{epoch}_{batch}.pt")
-            
 
-def test_loop(dataloader, model, loss_fn):
+
+def test_loop(dataloader, model, loss_fn, epoch):
     size = len(dataloader.dataset)
     num_batches = len(dataloader)
     test_loss = 0
@@ -265,16 +270,22 @@ def test_loop(dataloader, model, loss_fn):
     test_loss /= num_batches
     print(f"Avg loss: {test_loss:>8f} \n")
 
+    writer.add_scalar('test loss',
+                    test_loss,
+                    epoch)
+
     lab = np.concatenate((X[0].cpu().numpy(), pred[0].cpu().numpy()), axis=0).transpose(1, 2, 0)
     rgb = color.lab2rgb(lab)
 
 if __name__ == "__main__":
+    writer.add_graph(model, torch.rand(batch_size, 1, 64, 64).to(device))
     for t in range(epochs):
         print(f"Epoch {t+1}/{epochs}\n-------------------------------")
         train_loop(train_loader, model, loss_fn, optimizer, t)
-        test_loop(test_loader, model, loss_fn)
+        test_loop(test_loader, model, loss_fn, t)
 
     print("Done!")
 
     # save model
     torch.save(model, "model3raw.pth")
+    writer.close()
