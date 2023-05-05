@@ -1,17 +1,11 @@
 import os
 from skimage import io, color
-import matplotlib.pyplot as plt
-import seaborn as sns
 import numpy as np
 import pandas as pd
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader, random_split
-import torchvision
-from torchvision.io import read_image
 from torchvision import transforms
-from tqdm import tqdm
 
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -222,8 +216,6 @@ from torchinfo import summary
 model = ImageColorizerModel()
 summary(model, input_size=(batch_size, 1, 64, 64), col_names=["input_size", "output_size", "num_params", "kernel_size",], depth=5)
 
-from tqdm import tqdm
-
 model = ImageColorizerModel().to(device)
 
 train_losses = []
@@ -267,12 +259,13 @@ def test_loop(dataloader, model, loss_fn):
     lab = np.concatenate((X[0].cpu().numpy(), pred[0].cpu().numpy()), axis=0).transpose(1, 2, 0)
     rgb = color.lab2rgb(lab)
 
-for t in range(epochs):
-    print(f"Epoch {t+1}/{epochs}\n-------------------------------")
-    train_loop(train_loader, model, loss_fn, optimizer, t)
-    test_loop(test_loader, model, loss_fn)
+if __name__ == "__main__":
+    for t in range(epochs):
+        print(f"Epoch {t+1}/{epochs}\n-------------------------------")
+        train_loop(train_loader, model, loss_fn, optimizer, t)
+        test_loop(test_loader, model, loss_fn)
 
-print("Done!")
+    print("Done!")
 
-# save model
-torch.save(model, "model3raw.pth")
+    # save model
+    torch.save(model, "model3raw.pth")
