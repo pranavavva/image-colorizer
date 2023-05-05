@@ -220,6 +220,7 @@ summary(model, input_size=(batch_size, 1, 64, 64), col_names=["input_size", "out
 model = ImageColorizerModel().to(device)
 
 train_losses = []
+test_losses = []
 
 lr = 5e-5
 epochs = 64
@@ -238,8 +239,6 @@ def train_loop(train_loader, model, loss_fn, optimizer, epoch):
         
         loss, current = loss.item(), batch * len(X)
 
-        train_losses.append(loss)
-
         if batch % 50 == 0:
             print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
 
@@ -255,6 +254,8 @@ def train_loop(train_loader, model, loss_fn, optimizer, epoch):
                 'optimizer_state_dict': optimizer.state_dict(),
                 'loss': loss,
                 }, f"checkpoints/model3raw_checkpoint_{epoch}_{batch}.pt")
+    
+    train_losses.append(loss)
 
 
 def test_loop(dataloader, model, loss_fn, epoch):
@@ -269,6 +270,7 @@ def test_loop(dataloader, model, loss_fn, epoch):
         
     test_loss /= num_batches
     print(f"Avg loss: {test_loss:>8f} \n")
+    test_losses.append(test_loss)
 
     writer.add_scalar('test loss',
                     test_loss,
@@ -288,4 +290,8 @@ if __name__ == "__main__":
 
     # save model
     torch.save(model, "model3raw.pth")
+
+    # save losses as np arrays
+    np.save("model3raw_train_losses.npy", np.array(train_losses))
+    np.save("model3raw_test_losses.npy", np.array(test_losses))
     writer.close()
