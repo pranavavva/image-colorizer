@@ -8,9 +8,11 @@ import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader, random_split
 from torchvision import transforms
 from torch.utils.tensorboard import SummaryWriter
+import torch_directml
 
 writer = SummaryWriter("runs/model4_ex1")
-device = torch.device("cuda" if torch.cuda.is_available() else "mps")
+# device = torch.device("cuda" if torch.cuda.is_available() else "mps")
+device = torch_directml.device()
 
 print(f"Using device: {device}")
 
@@ -43,6 +45,8 @@ class ImageNetDataset(Dataset):
 
         return l.float().to(device), ab.float().to(device)
 
+print("Creating datasets and dataloaders...")
+
 root_dir = "./data/"
 batch_size = 128
 n_train = 1_000_000 # max 1281167
@@ -60,7 +64,7 @@ train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True, num_wo
 val_loader = DataLoader(val_set, batch_size=batch_size, shuffle=True, num_workers=0)
 test_loader = DataLoader(test_set, batch_size=batch_size, shuffle=True, num_workers=0)
 
-l, ab = next(iter(train_loader))
+print("Done creating datasets and dataloaders.")
 
 class BaseModel(nn.Module):
 	def __init__(self):
@@ -227,9 +231,11 @@ class ImageColorizerModel(BaseModel):
 from torchinfo import summary
 
 model = ImageColorizerModel()
-summary(model, input_size=(batch_size, 1, 64, 64), col_names=["input_size", "output_size", "num_params", "kernel_size",], depth=2)
+print(summary(model, input_size=(batch_size, 1, 64, 64), col_names=["input_size", "output_size", "num_params", "kernel_size",], depth=1))
 
+print("Compiling model...")
 model = ImageColorizerModel().to(device)
+print("Done compiling model.")
 
 train_losses = []
 test_losses = []
