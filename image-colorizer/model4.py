@@ -257,15 +257,13 @@ def train_loop(train_loader, model, loss_fn, optimizer, epoch):
             writer.add_scalar('training loss',
                             loss,
                             epoch * len(train_loader) + batch)
-        
-        # save a checkpoint every 1000 batches
-        if batch % 1000 == 0:
-            torch.save({
-                'epoch': epoch,
-                'model_state_dict': model.state_dict(),
-                'optimizer_state_dict': optimizer.state_dict(),
-                'loss': loss,
-                }, f"checkpoints/model4_checkpoint_{epoch}_{batch}.pt")
+
+    torch.save({
+        'epoch': epoch,
+        'model_state_dict': model.state_dict(),
+        'optimizer_state_dict': optimizer.state_dict(),
+        'loss': loss,
+        }, f"checkpoints/model4_checkpoint_{epoch}.pth")
     
     train_losses.append(loss)
 
