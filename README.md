@@ -2,44 +2,12 @@
 
 COS 429 Final Project
 
+This project uses Python 3.9.16. Install the required packages with `pip install -r requirements.txt`.
+
+## Dataset extraction
+
+Download the train and validation ImageNet-1K 64x64 dataset from [here](https://image-net.org). Place the `.npz` files in the `image-colorizer/data` directory. Then run the `imagenet_extract.ipynb` notebook. This will extract the images from the `.npz` files and save them as `.png` files in the `image-colorizer/data` directory.
+
 ## Models
 
-* Model 1: Sequential CNN (Simple CNN + Upsampling) with L2 loss
-    - ```ImageColorizerNetwork(
-        (conv_stack): Sequential(
-                (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1))
-                (1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
-                (2): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-                (3): ReLU()
-                (4): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1))
-                (5): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
-                (6): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-                (7): ReLU()
-                (8): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1))
-                (9): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
-                (10): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-                (11): ReLU()
-                (12): Upsample(scale_factor=2.0, mode='nearest')
-                (13): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2))
-                (14): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-                (15): ReLU()
-                (16): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2))
-                (17): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-                (18): ReLU()
-                (19): Upsample(scale_factor=2.0, mode='nearest')
-                (20): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-                (21): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-                (22): ReLU()
-                (23): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-                (24): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-                (25): ReLU()
-                (26): Upsample(scale_factor=2.0, mode='nearest')
-                (27): Conv2d(32, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-                (28): BatchNorm2d(3, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-                (29): ReLU()
-            )
-        )
-        ```
-    - L2 loss is calculated per pixel
-    - Predicted images have a heavy sepia tint. This is likely due to the fact that the L2 penalty is excessively penalizing the model. Desaturated colord tend to have a lower L2 loss than saturated colors.
-    
+The autoencoder model described in the paper is available in Jupyter notebook form in `model3raw.ipynb`. The U-Net model described in the paper is available in Jupyter nootebook form in `model4.ipynb`. There are also Python script versions of these models in `model3raw.py` and `model4.py`. The Python scripts will also create TensorBoard logs in the `runs` directory and will place epoch-end checkpoints in the `checkpoints` directory. Model training will use up to 20 GB of GPU memory.

@@ -193,3 +193,8 @@ pyrightconfig.json
 data/
 lightning_logs/
 saved_models/
+model3_outputs/
+model4_outputs/
+*.npy
+*.pth
+*.onnx
